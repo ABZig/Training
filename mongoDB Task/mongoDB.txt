@@ -1,0 +1,85 @@
+#mongoDB
+
+
+
+//create database
+use mywork
+
+
+
+//create collections
+db.createCollection('department')
+db.createCollection('employee')
+db.createCollection('salary')
+
+
+
+//insert data
+
+use mywork
+
+db.department.insertMany([
+    {dept_id: "1",dept_name: "Team Leader",created_date: "2017-01-01"},
+    {dept_id: "2",dept_name: "Android",created_date: "2017-01-02"},
+    {dept_id: "3",dept_name: "ios",created_date: "2017-01-03"}
+])
+db.department.find().pretty()
+
+
+
+db.employee.insertMany([
+    {emp_id: "01",emp_name: "abhishek",emp_no: "41",dept_id: "1",join_date: "2016-01-011",end_date: "2026-01-11"},
+    {emp_id: "02",emp_name: "ram",emp_no: "42",dept_id: "2",join_date: "2017-01-12",end_date: "2027-01-12"},
+    {emp_id: "03",emp_name: "lakhan",emp_no: "43",dept_id: "3",join_date: "2018-01-13",end_date: "2028-01-13"}
+    ])
+db.employee.find().pretty()
+
+
+
+db.salary.insertMany([
+    {salary_id: "001",emp_id: "01",salary_month: "jan",salary_year: "2016",salary_amount: 75000,generated_date: "2016-01-01"},
+    {salary_id: "002",emp_id: "02",salary_month: "feb",salary_year: "2017",salary_amount: 50000,generated_date: "2017-02-02"},
+    {salary_id: "003",emp_id: "03",salary_month: "dec",salary_year: "2018",salary_amount: 25000,generated_date: "2018-03-03"}
+    ])
+db.salary.find().pretty()
+
+
+
+
+
+//query to get all employees details along with  department and salary details
+
+db.employee.aggregate( [ { $lookup: { from: "department", localField: "dept_id", foreignField: "dept_id", as: "department_details" }}, 
+{ $lookup: { from: "salary", localField: "emp_id", foreignField: "emp_id", as: "salary_details" }} ]).pretty()
+
+
+
+
+//Write  queries to update data
+
+db.department.updateOne({‘dept_name’: ‘Android’}, {$set: {‘dept_name’: ‘php’}})
+db.department.updateOne({'dept_id': '3'}, {$set: {'dept_name': 'flutter'}})
+
+db.employee.updateOne({'join_date': '2017-01-12'}, {$set : {'emp_no':'50'}})
+db.employee.updateOne({'emp_id': '01'}, {$rename: {'emp_name': 'abhi'}})
+
+db.salary.updateMany({salary_id: '003', salary_month: {$exists: true}}, {$unset: {salary_month: ' '}})
+db.salary.updateOne({'salary_id': '002'}, {$inc: {'salary_amount': 5000}})
+
+
+
+
+//Write queries to delete data from the above collections
+
+db.department.deleteMany({'created_date': {$exists: 'false'}})
+db.employee.deleteOne({'emp_name': 'ram'})
+db.salary.deleteOne({'salary_year': '2018'})
+
+
+
+
+
+
+
+
+

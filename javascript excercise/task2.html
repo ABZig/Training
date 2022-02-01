@@ -1,0 +1,67 @@
+<!-- <html>
+<body>
+    <p id="demo"></p>
+    <script>
+        let str = "20,40,50,70,100";
+        function fun(str) {
+            let sum = 0;
+            const spliter = str.split(",");
+            for (let i of spliter) {
+                sum = sum + Number(i);
+            }
+            return (sum);
+        }
+        console.log(fun(str));
+    </script>
+</body>
+</html> -->
+
+
+Write a function to return the sum of the numbers separated by comma
+
+<!DOCTYPE html>
+<html>
+<body>
+    <p id="UseOfMap"></p>
+    <p id="UseOfForEach"></p>
+    <p id="UseOfReduce"></p>
+
+    <script>
+        let ArrayAsString = "20,40,50,70,100";
+        document.getElementById("UseOfMap").innerHTML = "Sum using map method is: " + ArraySumUsingMap(ArrayAsString);
+        document.getElementById("UseOfForEach").innerHTML = "Sum using for Each method is : " + ArraySumUsingForEach(ArrayAsString);
+        document.getElementById("UseOfReduce").innerHTML = "Sum using reduce method is: " + ArraySumUsingReduce(ArrayAsString);
+
+        function ArraySumUsingMap(str) {
+            let array = str.split(",");
+            let sum = 0;
+            array.map(Mymapfunction);
+            function Mymapfunction(value) {
+                sum += Number(value);
+            }
+            return sum;
+        }
+
+        function ArraySumUsingForEach(str) {
+            let array = str.split(",");
+            let sum = 0;
+            array.forEach(MyforEachFunction);
+            function MyforEachFunction(value) {
+                sum += Number(value);
+            }
+            return sum;
+        }
+
+        function ArraySumUsingReduce(str) {
+            let array = str.split(",");
+            let sum = array.reduce(Myreducefunction);
+            function Myreducefunction(total, value) {
+                return Number(total) + Number(value);
+            }
+            return sum;
+        }
+    </script>
+
+</body>
+</html>
+
