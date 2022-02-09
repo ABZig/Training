@@ -10,8 +10,7 @@ $(document).ready(function(){
           url: '/todo',
           data: todo,
           success: function(data){
-            //do something with the data via front-end framework
-            location.reload();
+             location.reload();
           }
         });
         return false;
@@ -23,7 +22,6 @@ $(document).ready(function(){
           type: 'DELETE',
           url: '/todo/' + item,
           success: function(data){
-            //do something with the data via front-end framework
             location.reload();
           }
         });

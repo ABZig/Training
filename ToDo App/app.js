@@ -12,9 +12,6 @@ app.use(/*'/assets', */express.static('./public'))
 //fire controllers
 todoController(app);
 
-//set static file
-// localhost:300/assets/style.css
-
 //listen to port
 app.listen(3300);
-console.log('You are listening to port 3300');
+console.log('Listening to port 3300');
