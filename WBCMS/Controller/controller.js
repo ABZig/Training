@@ -20,7 +20,7 @@ module.exports = function(app){
 app.get("/", (req, res) => {
 
     Course.findAll().then(Course => {
-        res.render('index', {Course});
+        res.render('index', {Course : Course });
         console.log(Course);
     });
 
@@ -47,7 +47,7 @@ app.post('/insert', urlencodedParser, (req,res)=>{
 app.get("/update-course/:id", (req, res) => {
     const courseid = req.params.id;
     Course.findOne({where: {id: courseid}}).then(Course => {
-        res.render('update_course', {Course});
+        res.render('update_course', {Course : Course });
     });
 });
 
@@ -66,7 +66,7 @@ app.post("/update-course/:id", urlencodedParser, (req, res) => {
     });
 
 
-app.get('/:id', function(req, res) {
+app.get('/delete/:id', function(req, res) {
     const courseid = req.params.id; 
     Course.destroy(
         {

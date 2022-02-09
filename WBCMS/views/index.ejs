@@ -59,11 +59,12 @@
                                           <td><%= Course[i].name%></td>
                                           <td><%= Course[i].duration%></td>
                                           <td><%= Course[i].fees%></td>
+                                          <% console.log(Course[i].id) %>
                                           <td><a href="/update-course/<%= Course[i].id %>" class="btn border-shadow update">
                                             <span class="text-gradient"><i class="fas fa-pencil-alt"></i></span>
                                         </a></td>
                                         <td>
-                                            <a href="/<%= Course[i].id %>" class="btn border-shadow update"
+                                            <a href="/delete/<%= Course[i].id %>" class="btn border-shadow update"
                                            onclick="return confirm('Are you sure you want to delete this record?')">
                                            <span class="text-gradient"><i class="fas fa-times"></i></span></a>
                                           </td> 
