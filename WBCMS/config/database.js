@@ -11,7 +11,7 @@ const db={};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.courses = require('./Course')(sequelize,DataTypes)
+db.courses = require('../models/Course')(sequelize,DataTypes)
 db.sequelize.sync()
 .then(()=>{
     console.log("yes're sync");

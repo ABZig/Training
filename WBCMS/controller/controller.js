@@ -1,27 +1,26 @@
-
 const bodyParser = require ('body-parser');
 
-const { dirname } = require("path");
+
 var path = require('path');
 
 var urlencodedParser = bodyParser.urlencoded({extended:false});
 
-var db = require('../models/database');
-const Course = db.courses;
+var db = require('../config/database');
+const course = db.courses;
 
 
 const alert = require('alert');
 
-const sequelize = require("../models/database");
-const { response } = require("express");
+const sequelize = require("../config/database");
+
 
 module.exports = function(app){
 
 app.get("/", (req, res) => {
 
-    Course.findAll().then(Course => {
-        res.render('index', {Course : Course });
-        console.log(Course);
+    course.findAll().then(course => {
+        res.render('index', {course : course });
+        console.log(course);
     });
 
 });
@@ -33,7 +32,7 @@ app.get("/form", (req, res) => {
 
 app.post('/insert', urlencodedParser, (req,res)=>{
     return db.sequelize.sync().then(()=>{
-        Course.create({
+        course.create({
             name: req.body.courseName,
             duration: req.body.courseDuration,
             fees: req.body.courseFee,
@@ -46,14 +45,14 @@ app.post('/insert', urlencodedParser, (req,res)=>{
 
 app.get("/update-course/:id", (req, res) => {
     const courseid = req.params.id;
-    Course.findOne({where: {id: courseid}}).then(Course => {
-        res.render('update_course', {Course : Course });
+    course.findOne({where: {id: courseid}}).then(course => {
+        res.render('update_course', {course : course });
     });
 });
 
 app.post("/update-course/:id", urlencodedParser, (req, res) => {
     const courseid = req.params.id;
-    Course.update(
+    course.update(
         {
             name : req.body.courseName,
             duration : req.body.courseDuration,
@@ -68,7 +67,7 @@ app.post("/update-course/:id", urlencodedParser, (req, res) => {
 
 app.get('/delete/:id', function(req, res) {
     const courseid = req.params.id; 
-    Course.destroy(
+    course.destroy(
         {
             where: {id:courseid}
         })
