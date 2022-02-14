@@ -1,58 +1,51 @@
-const bodyParser = require ('body-parser');
-
-
 var path = require('path');
-
-var urlencodedParser = bodyParser.urlencoded({extended:false});
 
 var db = require('../config/database');
 const course = db.courses;
-
 
 const alert = require('alert');
 
 const sequelize = require("../config/database");
 
 
-module.exports = function(app){
+module.exports = {
 
-app.get("/", (req, res) => {
-
-    course.findAll().then(course => {
+home: (req, res) => {
+       course.findAll().then(course => {
         res.render('index', {course : course });
         console.log(course);
-    });
+        
+        });
+},
 
-});
-
-app.get("/form", (req, res) => {
-    res.render("add_course");
-});
+getAddCourse: (req, res) => {
+        res.render("add_course");
+    },
 
 
-app.post('/insert', urlencodedParser, (req,res)=>{
-    return db.sequelize.sync().then(()=>{
+postAddCourse: (req, res) => {
+      return db.sequelize.sync().then(()=>{
         course.create({
             name: req.body.courseName,
             duration: req.body.courseDuration,
             fees: req.body.courseFee,
-     });
-    alert("Added Successfully");
-    res.redirect('/');
-});
-});
+        });
+        alert("Added Successfully");
+        res.redirect('/');
+    });
+},
 
-
-app.get("/update-course/:id", (req, res) => {
+getUpdateCourse: (req, res) => {
     const courseid = req.params.id;
     course.findOne({where: {id: courseid}}).then(course => {
-        res.render('update_course', {course : course });
-    });
-});
+    res.render('update_course', {course : course });
+        });
+    },
 
-app.post("/update-course/:id", urlencodedParser, (req, res) => {
-    const courseid = req.params.id;
-    course.update(
+postUpdateCourse: (req, res) => {
+
+       const courseid = req.params.id;
+        course.update(
         {
             name : req.body.courseName,
             duration : req.body.courseDuration,
@@ -62,19 +55,17 @@ app.post("/update-course/:id", urlencodedParser, (req, res) => {
         });
         alert("Updated Successfully");
         res.redirect("/");
-    });
+},
 
-
-app.get('/delete/:id', function(req, res) {
-    const courseid = req.params.id; 
-    course.destroy(
+getDelete: (req, res) => {
+       const courseid = req.params.id; 
+        course.destroy(
         {
             where: {id:courseid}
-        })
+        });
         alert("Deleted Successfully");
         res.redirect("/");
-      });
-
+      },
     }
 
 // db.sequelize.sync().then((result) => {
