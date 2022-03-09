@@ -17,40 +17,86 @@ getAddMember: (req, res) => {
     res.render("add-member", { memberAdd });
 },
 
-// post request for add member 
-postAddMember: async (req, res) => {
-  try{
-    user.findOne({ emailaddress: req.body.emailaddress})
-    .then(result => {
-      member.create({
-        _id: mongoose.Types.ObjectId(),
-        name: result.firstname,
-        accountid: req.params.id,
-        userid: result._id
-      })
-      .then(result1 => {
-        account.updateOne ({ 
-          _id:req.params.id,
+// // post request for add member 
+// postAddMember: async (req, res) => {
+//   try{
+//     user.findOne({ emailaddress: req.body.emailaddress})
+//     .then(result => {
+//       member.create({
+//         _id: mongoose.Types.ObjectId(),
+//         name: result.firstname,
+//         accountid: req.params.id,
+//         userid: result._id
+//       })
+//       .then(result1 => {
+//         account.updateOne ({ 
+//           _id:req.params.id,
           
-         },
-         {
-          $push: { userid: result1.userid }
-          // $push: { members : result1._id }
-          // $set: { members : result1._id }
-        })
-      .then(record => {
-        res.redirect('/acc-details/' + req.params.id);
-      })
-    })
-    })
-    .catch(err => {
-      console.log(err);
+//          },
+//          {
+//           $push: { userid: result1.userid }
+//           // $push: { members : result1._id }
+//           // $set: { members : result1._id }
+//         })
+//       .then(record => {
+//         res.redirect('/acc-details/' + req.params.id);
+//       })
+//     })
+//     })
+//     .catch(err => {
+//       console.log(err);
+//     });
+//   }
+//   catch(error){
+//     console.log("Catch block");
+//     console.log(error);
+//   }
+// },
+
+//post request for add member
+postAddMember:  (req, res) => {
+  user.findOne({ emailaddress: req.body.emailaddress})
+  .then(result => {
+     if(result){
+    account.findOne({
+        _id:req.params.id,
+        userid: { "$in": result._id }
+    }).then(data => {
+        console.log(data);
+        if(data){
+            return res.status(409).json({
+                message: "Member exists"
+            });
+        }else{
+            member.create({
+                _id: mongoose.Types.ObjectId(),
+                name: result.firstname,
+                accountid: req.params.id,
+                userid: result._id
+              })
+              .then(result1 => {
+                account.updateOne ({ 
+                  _id:req.params.id,  
+                 },
+                 {
+                  $push: { userid: result1.userid }
+                  // $push: { members : result1._id }
+                  // $set: { members : result1._id }
+                })
+              .then(record => {
+                res.redirect('/acc-details/' + req.params.id);
+              })
+            })
+        }
     });
-  }
-  catch(error){
-    console.log("Catch block");
-    console.log(error);
-  }
+    } else {
+        return res.status(401).json({
+        error: 'User does not exist'
+       });
+    }
+}).catch ((err)=> {
+  console.log(err);
+});
 },
 
 //get request for delete member 
