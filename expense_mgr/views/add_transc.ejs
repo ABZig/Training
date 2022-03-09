@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Transaction</title>
+    <%- include('./partials/header.ejs') %>    
+</head>
+<body>
+    <div class="container" >
+        <div class="form-title-signup text-center">
+            <h2 class="text-dark my-5"><h1>Add Transaction Form</h1></h2>
+        </div><br>
+    <form action="/addtransc/<%= transcAdd.id %>" method="post">
+
+        <label class="mr-sm-2" for="examplefordate">Date</label>
+        <input type="hidden" name="tranractionAccoutId" value="<%= transcAdd.id %>"/>
+        <div class="container">
+            <div class="row">
+               <div class='col-sm-6 form-group'>
+                     <div class='input-group date' id='datetimepicker1'>
+                        <input type='text' class="form-control" name="date" />
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                     </div>
+               </div>
+               <script type="text/javascript">
+                  $(function () {
+                      $('#datetimepicker1').datetimepicker();
+                  });
+               </script>
+            </div>
+         </div>
+          <br>
+            <div class="form-row align-items-center">
+                <div class="col-auto my-1">
+                <label class="mr-sm-2" for="inlineFormCustomSelect">Prefered Type</label>
+                <select class="custom-select mr-sm-2" name="preferedtype" id="inlineFormCustomSelect">
+                    <option selected>Choose...</option>
+                    <option value="Credit">Credit</option>
+                    <option value="Debit">Debit</option>
+                </select>
+                </div>
+          </div><br>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Description</label>
+                <textarea class="form-control" name="description"  id="exampleFormControlTextarea1" rows="3" placeholder="I am crediting/Debiting this much of amount ..."></textarea>
+            </div><br>
+            
+            <div class="form-group">
+                <label for="exampleForaddamount">Add Amount</label>
+            <input class="form-control" name="addamount" type="text" placeholder="Amount..."><br>
+        </div>
+            <button class="submit-button bounceInUp" type="submit">Add</button>
+    </form>
+</div>
+</body>
+</html>
