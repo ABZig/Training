@@ -7,7 +7,7 @@
     <title>Account Details</title>
     <%- include('./partials/header.ejs') %>
 </head>
-<body>
+<body style="background-color: lightcyan">
   <div class="container" >
     <div class="filter col-md-6 mb-3 my-4">
         <a href="/home"><button class="gesture btn btn-info my-4"> <i class="fas fa-angle-double-left"></i> Home Page </button></a>
@@ -46,10 +46,10 @@
                       <th colspan="2">Members</th>
                     </tr>
                 </thead>     
-                <tbody>
+                <tbody style="background-color: lightcyan">
                     <tr>
                         <td colspan="4">
-                            <table class="table">
+                            <table class="table" style="background-color: lightcyan">
                                   <tr>
                                       <th>Date</th>
                                       <th>Type</th>
@@ -57,7 +57,7 @@
                                       <th>Amount</th>
                                       <th colspan="2">Action</th>
                                   </tr>
-                                <tbody>
+                                <tbody >
                                   <% if(result1.length!=0){ result1.forEach(function(data){ %>
                                   <tr>
                                     <td><%= data.date %></td>
@@ -82,10 +82,9 @@
                             </table>
                         </td>
                         <td colspan="2">
-                            <table class="table">
+                            <table class="table" style="background-color: lightcyan">
                                 <tr>
                                     <th>Name</th>
-                                    <!-- <th colspan="2">Action</th> -->
                                 </tr>
                               <tbody>
                                 <% if(result2.length!=0){ result2.forEach(function(data1){ %>
