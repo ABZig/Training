@@ -39,7 +39,6 @@ postAddTransc: async function(req, res) {
 //get request for update transaction
 getUpdateTransc: async function(req, res) {
     let result1 = await transaction.findById(req.params.id ).exec(); 
-    console.log(result1);
     res.render('update-transc', {result1});
 
  },

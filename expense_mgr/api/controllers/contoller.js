@@ -24,7 +24,6 @@ gesture: (req, res) => {
 
 //get request for account details
 getAccDetails: async (req, res) => {
-  //FIND ALL CONSULTATIONS FILTERED BY STATUS
   let result1;
   let result2;
   let result3;
@@ -33,22 +32,21 @@ getAccDetails: async (req, res) => {
     result1 = await transaction.find({ accountid: req.params.id }).sort({date: 'descending'}).exec();
   } catch (err) {
     return res.status(400).json({
-      error: "Erorr en STATUS1",
+      error: "Erorr en transaction",
     });
   }
   try {
     result2 = await member.find({ accountid: req.params.id }).exec();
   } catch (err) {
     return res.status(400).json({
-      error: "Erorr en STATUS2",
+      error: "Erorr en member",
     });
   }
     try {
       result3 = await account.findOne({ _id: req.params.id }).exec();
-      console.log(result3);
     } catch (err) {
       return res.status(400).json({
-        error: "Erorr en STATUS3",
+        error: "Erorr en accountname",
       });
   }
 

@@ -26,8 +26,6 @@ postAddMember:  (req, res) => {
         _id:req.params.id,
         userid: { "$in": result._id }
     }).then(data => {
-        console.log(data);
-
         if(data){
             return res.status(409).json({
                 message: "Member exists"
@@ -68,7 +66,6 @@ postAddMember:  (req, res) => {
 getDeleteMember: async (req, res) => {
   const memberid = req.params.id;
   let result2 = await member.findById(req.params.id ).exec();
-  console.log(result2);
   member.deleteOne({_id:memberid}).then((result) => {
       res.redirect("/acc-details/" + result2.accountid);
       // alert("Deleted Successfully");

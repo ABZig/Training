@@ -9,14 +9,13 @@ const alert = require('alert');
 module.exports = {
 
 gethome:async (req, res) => {
-    const result = await account.find({ userid:req.session._id})  // .populate({path :'members', select: 'name'}).exec();  
+    const result = await account.find({ userid:req.session._id})
+    // account.find({ $or:[ {'userid':req.session._id}, {'members':req.session._id} ]}).exec();
+    // .populate({path :'members', select: 'name'}).exec();  
     //const result = await member.find({ userid:req.session._id}).populate({path :'members', select: 'name'}).exec();
     // const result = await account.aggregate([{ $lookup:({ from: 'member', localField: 'userid', foreignField: 'members', as: 'details'}) }]);
-    console.log(result);
-    // account.find({ $or:[ {'userid':req.session._id}, {'members':req.session._id} ]}).exec();
+    
     userDetails = await user.findOne({_id:req.session._id}).exec();
-    // const members = await member.findOne({members: result._id}).exec();
-    // console.log(members);
     res.render('home',{result,userDetails});
 },
 
@@ -42,7 +41,6 @@ getUpdateAccount: (req, res) => {
   })
   .exec()
   .then((result) => {
-      console.log(result);
        res.render('update-account' , {result});
    }).catch((err) => {
        console.log(err);
