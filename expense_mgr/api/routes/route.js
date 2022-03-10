@@ -7,7 +7,10 @@ const loginController = require("../controllers/loginController");
 const addTranscController = require("../controllers/addTranscController");
 const addAccountController = require("../controllers/addAccountController");
 const addMemberController = require("../controllers/addMemberController");
-const sessionChecker = require('../middleware/middleware');
+// const sessionChecker = require('../middleware/middleware');
+// const userChecker = require('../middleware/middleware');
+const {sessionChecker, userChecker} = require('../middleware/middleware');
+
 
 route.get('/', controller.home);
 
@@ -27,7 +30,7 @@ route.get('/delete/:id', sessionChecker, addAccountController.getDelete);
 
 route.get('/logout', controller.logout);
 
-route.get('/acc-details/:id', sessionChecker, controller.getAccDetails);
+route.get('/acc-details/:id', sessionChecker, userChecker, controller.getAccDetails);
 
 route.get('/addtransc/:id', sessionChecker, addTranscController.getAddTransc);
 route.post('/addtransc/:id', sessionChecker, addTranscController.postAddTransc);
