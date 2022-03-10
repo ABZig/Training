@@ -4,6 +4,7 @@ const controllers = require('./controller/controller');
 app.set('view engine', 'ejs');  
 const route = require("./routes/route");
 app.use("/", route);
+const { check, validationResult } = require('express-validator')
 
 app.use(express.static('./assets'));    
 

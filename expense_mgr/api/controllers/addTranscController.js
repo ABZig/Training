@@ -66,6 +66,14 @@ postUpdateTransc: async (req, res) => {
    });
 }, 
 
+// if( DebitAmount > TotalAmount){
+//   return res.status(401).json({
+//     err: 'Total Balance can not be lessthen 0'
+//   });
+// }
+
+
+
 //get request for delete transaction
 getDeleteTransc: async function(req, res){
   const transactionid = req.params.id;
@@ -78,3 +86,5 @@ getDeleteTransc: async function(req, res){
    });
  }
 }
+
+

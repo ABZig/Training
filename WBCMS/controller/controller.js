@@ -22,6 +22,22 @@ getAddCourse: (req, res) => {
         res.render("add_course");
     },
 
+    
+// postAddCourse: (req, res) => {
+//         db.sequelize.sync().then(()=>{
+//             let name = req.body.courseName;
+//             let duration = req.body.courseDuration;
+//             let fees = req.body.courseFee;
+//         if (name != null && duration != null && fees != null && name.trim() != ''  && fees != ' ' && duration != ' ') {
+//         course.create({ name, duration, fees }).then(() => {
+//             alert("Added Successfully");
+//             res.redirect("/");
+//         });
+//         }else {
+//             console.log('error');
+//         };
+//     });
+// },
 
 postAddCourse: (req, res) => {
       return db.sequelize.sync().then(()=>{

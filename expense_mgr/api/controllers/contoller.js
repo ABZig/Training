@@ -65,11 +65,6 @@ getAccDetails: async (req, res) => {
       CreditAmount = Number(obj["addamount"]) + CreditAmount;
     }
     TotalAmount = CreditAmount - DebitAmount;
-    if( DebitAmount > TotalAmount){
-      return res.status(401).json({
-        err: 'Total Balance can not be lessthen 0'
-      });
-    }
 }
 
 let record = {

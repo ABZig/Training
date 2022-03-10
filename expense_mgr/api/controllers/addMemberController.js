@@ -27,6 +27,7 @@ postAddMember:  (req, res) => {
         userid: { "$in": result._id }
     }).then(data => {
         console.log(data);
+
         if(data){
             return res.status(409).json({
                 message: "Member exists"
