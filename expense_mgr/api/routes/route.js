@@ -22,24 +22,24 @@ route.post('/home', loginController.postlogin);
 
 route.get('/gesture', controller.gesture);
 
-route.get('/home', sessionChecker, addAccountController.gethome);
-route.post('/addaccount', sessionChecker, addAccountController.postAddAccount);
-route.get('/update-account/:id', sessionChecker, addAccountController.getUpdateAccount);
-route.post('/update-account/:id', sessionChecker, addAccountController.postUpdateAccount);
-route.get('/delete/:id', sessionChecker, addAccountController.getDelete);
+route.get('/home', sessionChecker,addAccountController.gethome);
+route.post('/addaccount', sessionChecker, userChecker, addAccountController.postAddAccount);
+route.get('/update-account/:id', sessionChecker, userChecker, addAccountController.getUpdateAccount);
+route.post('/update-account/:id', sessionChecker, userChecker, addAccountController.postUpdateAccount);
+route.get('/delete/:id', sessionChecker, userChecker, addAccountController.getDelete);
 
 route.get('/logout', controller.logout);
 
 route.get('/acc-details/:id', sessionChecker, userChecker, controller.getAccDetails);
 
-route.get('/addtransc/:id', sessionChecker, addTranscController.getAddTransc);
-route.post('/addtransc/:id', sessionChecker, addTranscController.postAddTransc);
+route.get('/addtransc/:id', sessionChecker, userChecker, addTranscController.getAddTransc);
+route.post('/addtransc/:id', sessionChecker, userChecker, addTranscController.postAddTransc);
 route.get('/update-transc/:id', sessionChecker, addTranscController.getUpdateTransc);
-route.post('/update-transc/:id', sessionChecker, addTranscController.postUpdateTransc);
-route.get('/transaction/delete/:id', sessionChecker, addTranscController.getDeleteTransc);
+route.post('/update-transc/:id', sessionChecker, userChecker, addTranscController.postUpdateTransc);
+route.get('/transaction/delete/:id', sessionChecker, userChecker, addTranscController.getDeleteTransc);
 
-route.get('/add-member/:id', sessionChecker, addMemberController.getAddMember);
-route.post('/add-member/:id', sessionChecker, addMemberController.postAddMember);
-route.get('/add-member/delete/:id', sessionChecker, addMemberController.getDeleteMember);
+route.get('/add-member/:id', sessionChecker, userChecker, addMemberController.getAddMember);
+route.post('/add-member/:id', sessionChecker, userChecker, addMemberController.postAddMember);
+route.get('/add-member/delete/:id', sessionChecker, userChecker, addMemberController.getDeleteMember);
 
 module.exports = route;
