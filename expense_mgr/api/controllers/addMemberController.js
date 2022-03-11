@@ -5,8 +5,6 @@ const user = require('../models/user');
 const account = require('../models/account');
 
 
-
-
 //export code
 module.exports = {
 
@@ -65,7 +63,7 @@ postAddMember:  (req, res) => {
    
 },
 
-//get request for delete member 
+// get request for delete member 
 getDeleteMember: async (req, res) => {
   const memberid = req.params.id;
   let result2 = await member.findById(req.params.id ).exec();
@@ -76,8 +74,21 @@ getDeleteMember: async (req, res) => {
    });
  },
 
-
 }
 
-
+//get request for delete member 
+// getDeleteMember: async (req, res) => {
+//   const memberid = req.params.id;
+//   let result2 = await member.findById(req.params.id ).exec();
+//   member.findOneAndUpdate({_id:memberid}, {$pull: {member: {accountid: member.accountid}}}, (err, data) =>
+//         { if(err){         
+//             return res.status(500).json({ error: 'error in deleting' });    
+//         } else{
+//            member.deleteOne({_id:memberid}).then((result2) => {
+//           res.redirect("/acc-details/" + result2.accountid);
+//           })
+//       }
+//     })
+//   }
+//}
 
