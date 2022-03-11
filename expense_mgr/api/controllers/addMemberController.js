@@ -73,7 +73,6 @@ getDeleteMember: async (req, res) => {
        console.log(err);
    });
  },
-
 }
 
 //get request for delete member 
