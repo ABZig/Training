@@ -1,7 +1,8 @@
-// middleware function to check for logged-in users
+const { permission } = require('../controllers/contoller');
 const account = require('../models/account');
-// const user = require('../models/user');
+const transaction = require('../models/transaction');
 
+// middleware function to check for logged-in users
 var sessionChecker = (req, res, next) => {
     if (req.session._id) {
       next();
@@ -23,10 +24,27 @@ var userChecker = async (req, res, next) => {
     if(uid == true){
       next();
     }else{
-      return res.status(401).json({
-        error: 'Permission Denied'
-       });
+      res.render('permission');
     }
 };
 
-module.exports = {sessionChecker, userChecker};
+//middleware function to check for legitimate transaction Operation
+var transcChecker = async( req, res, next) => {
+  let record1 = await transaction.findOne({_id: req.params.id});
+  let record2 = await account.findOne({_id: record1.accountid});
+  let uid = false;
+  record2.userid.forEach(element2 => {
+    console.log(element2);
+    if(req.session._id == element2){
+      uid = true;
+    }
+  });
+  if(uid == true){
+    next();
+  }else{
+    res.render('permission');
+ }
+}
+
+
+module.exports = {sessionChecker, userChecker, transcChecker};

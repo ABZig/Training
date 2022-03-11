@@ -1,6 +1,5 @@
 //require files
 const member = require('../models/member');
-const alert = require('alert');
 const mongoose = require('mongoose');
 const user = require('../models/user');
 const account = require('../models/account');
@@ -68,7 +67,6 @@ getDeleteMember: async (req, res) => {
   let result2 = await member.findById(req.params.id ).exec();
   member.deleteOne({_id:memberid}).then((result) => {
       res.redirect("/acc-details/" + result2.accountid);
-      // alert("Deleted Successfully");
    }).catch((err) => {
        console.log(err);
    });

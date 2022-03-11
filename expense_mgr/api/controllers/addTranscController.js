@@ -1,7 +1,6 @@
 //require files
 const mongoose = require('mongoose');
 const transaction = require('../models/transaction');
-const alert = require('alert');
 
 //export code
 module.exports = {
@@ -40,7 +39,6 @@ postAddTransc: async function(req, res) {
 getUpdateTransc: async function(req, res) {
     let result1 = await transaction.findById(req.params.id ).exec(); 
     res.render('update-transc', {result1});
-
  },
 
  //post request for update transaction
@@ -60,7 +58,6 @@ postUpdateTransc: async (req, res) => {
         }
     })
    .then(()=>{
-    alert("Updated Successfully");
     res.redirect("/acc-details/"+ updtransc.accountid);
    });
 }, 
@@ -79,7 +76,6 @@ getDeleteTransc: async function(req, res){
   let result1 = await transaction.findById(req.params.id ).exec();
   transaction.deleteOne({_id:transactionid}).then((result) => {
     res.redirect("/acc-details/" + result1.accountid);
-       alert("Deleted Successfully");
    }).catch((err) => {
        console.log(err);
    });

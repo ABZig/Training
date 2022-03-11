@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const account = require('../models/account');
 const user = require('../models/user');
 const member = require('../models/member');
-const alert = require('alert');
 
 //export code
 module.exports = {
@@ -59,7 +58,6 @@ postUpdateAccount: (req, res) => {
        $set: { accountname : req.body.accountname }
     })
    .then(()=>{
-    alert("Updated Successfully");
     res.redirect("/home");
    });
 },
@@ -68,7 +66,6 @@ postUpdateAccount: (req, res) => {
 getDelete: (req, res) => {
     const accountid = req.params.id;
     account.deleteOne({_id:accountid}).then((result) => {
-         alert("Deleted Successfully");
          res.redirect("/home");
      }).catch((err) => {
          console.log(err);

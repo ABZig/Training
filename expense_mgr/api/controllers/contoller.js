@@ -8,18 +8,16 @@ module.exports = {
 
 //get request for home page
 home: (req, res) => {
-    if(req.session._id){
-      account.findOne({userid:req.session._id}).then((result)=>{
-      res.render('home',{result})
-  })
-  }else{
-    res.render('index');
-  }
+     res.render('index');
 },
 
 //get request for gesture page
 gesture: (req, res) => {
     res.render('gesture');
+},
+
+permission: (req, res) => {
+    res.render('permission');
 },
 
 //get request for account details
