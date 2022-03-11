@@ -5,6 +5,8 @@ const user = require('../models/user');
 const account = require('../models/account');
 
 
+
+
 //export code
 module.exports = {
 
@@ -18,6 +20,7 @@ getAddMember: (req, res) => {
 
 //post request for add member
 postAddMember:  (req, res) => {
+  
   user.findOne({ emailaddress: req.body.emailaddress})
   .then(result => {
      if(result){
@@ -59,6 +62,7 @@ postAddMember:  (req, res) => {
 }).catch ((err)=> {
   console.log(err);
 });
+   
 },
 
 //get request for delete member 
@@ -70,7 +74,9 @@ getDeleteMember: async (req, res) => {
    }).catch((err) => {
        console.log(err);
    });
- }
+ },
+
+
 }
 
 

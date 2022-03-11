@@ -22,7 +22,7 @@
             <div class="row">
                <div class='col-sm-6 form-group'>
                      <div class='input-group date' id='datetimepicker1'>
-                        <input type='text' class="form-control" name="date" placeholder="MM/DD/YYYY"/>
+                        <input type='text' class="form-control is-valid" name="date" placeholder="MM/DD/YYYY" required/>
                         <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -38,7 +38,7 @@
             <div class="form-row align-items-center">
                 <div class="col-auto my-1">
                 <label class="mr-sm-2" for="inlineFormCustomSelect">Prefered Type</label>
-                <select class="custom-select mr-sm-2" name="preferedtype" id="inlineFormCustomSelect">
+                <select class="custom-select mr-sm-2 is-valid" name="preferedtype" id="inlineFormCustomSelect" required>
                     <option selected>Choose...</option>
                     <option value="Credit">Credit</option>
                     <option value="Debit">Debit</option>
@@ -47,12 +47,12 @@
           </div><br>
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Description</label>
-                <textarea class="form-control" name="description"  id="exampleFormControlTextarea1" rows="3" placeholder="I am crediting/Debiting this much of amount ..."></textarea>
+                <textarea class="form-control is-valid" name="description"  id="exampleFormControlTextarea1" rows="3" placeholder="I am crediting/Debiting this much of amount ..." required></textarea>
             </div><br>
             
-            <div class="form-group">
+            <div class="form-group is-valid">
                 <label for="exampleForaddamount">Add Amount</label>
-            <input class="form-control" name="addamount" type="text" placeholder="amount..."><br>
+            <input class="form-control is-valid" name="addamount" type="text" placeholder="amount..." required><br>
         </div>
             <button class="submit-button bounceInUp" type="submit">Add</button>
     </form>

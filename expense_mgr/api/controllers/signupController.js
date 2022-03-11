@@ -4,7 +4,12 @@ const User = require('../models/user');
 const mongoose = require('mongoose');
 const tester = require('../../nodemailer/server');
 const account = require('../models/account');
+const { check, validationResult } = require ("express-validator");
 
+const signup_validation = () => [
+    check("firstname", "Enter firstname!").trim().notEmpty(),
+    check("lastname", "Enter lastname!").trim().notEmpty()
+];
 
 //export code
 module.exports = {
@@ -16,6 +21,8 @@ getsignup: (req, res) => {
 
 //post request for signup
 postsignup: (req, res) => {
+    const err = validationResult(req);
+    if (err.isEmpty()) {
     User.find({emailaddress: req.body.emailaddress})
     .then(result => {
         if(result.length >= 1) {
@@ -57,6 +64,13 @@ postsignup: (req, res) => {
             })
         }    
     })
-}
+    }else{
+        return res.status(400).json({
+            message: 'Null values are not allowed !!',
+        });
+    }
 
+},
+
+validation: [signup_validation()]
 }

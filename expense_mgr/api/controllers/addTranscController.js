@@ -1,6 +1,14 @@
 //require files
 const mongoose = require('mongoose');
 const transaction = require('../models/transaction');
+const { check, validationResult } = require ("express-validator");
+
+const transc_validation = () => [
+  check("date", "Enter date!").trim().notEmpty(),
+  check("preferedtype", "Enter preferedtype").trim().notEmpty(),
+  check("description", "Enter description").trim().notEmpty(),
+  check("addamount", "Enter addamount").trim().notEmpty()
+];
 
 //export code
 module.exports = {
@@ -15,7 +23,8 @@ getAddTransc: (req, res) => {
 
 //post request for add transaction
 postAddTransc: async function(req, res) {
-
+  const err = validationResult(req);
+    if (err.isEmpty()) {
   let acc = mongoose.Types.ObjectId(req.body.tranractionAccoutId);
   try{
     await transaction
@@ -32,6 +41,11 @@ postAddTransc: async function(req, res) {
     catch(error){
      console.log(error);
     }
+    }else{
+      return res.status(400).json({
+          message: 'Null values are not allowed !!',
+      });
+  }
      
 },
 
@@ -79,7 +93,10 @@ getDeleteTransc: async function(req, res){
    }).catch((err) => {
        console.log(err);
    });
- }
+ },
+
+ validation: [transc_validation()]
+
 }
 
 
