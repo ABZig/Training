@@ -4,7 +4,7 @@ module.exports = {
 
 //get request for home page
 home: (req, res) => {
-     res.render('index');
+     res.render('prehome');
 },
 
 //get request for gesture page
