@@ -25,7 +25,7 @@ getAddTransc: (req, res) => {
      intro: "",
      message: "",
    };
-  res.render("add_transc", { transcAdd, message });
+  res.render("add-transc", { transcAdd, message });
 },
 
 //post request for add transaction
@@ -58,7 +58,7 @@ postAddTransc: async function(req, res) {
         intro: "Value Error",
         message: "Null values are not allowed !!",
       };
-      res.render("add_transc", { transcAdd, message });
+      res.render("add-transc", { transcAdd, message });
   }
      
 },
