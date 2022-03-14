@@ -6,7 +6,7 @@ const User = require('../models/user');
 module.exports = {
 //get request for login
 getlogin: (req, res) => {
-        req.session.test ? req.session.test++ : req.session.test = res.render('login');
+        req.session.test ? req.session.test++ : req.session.test;
          var message = {
            flag: false,
            type: "",
@@ -45,13 +45,13 @@ postlogin: (req, res) => {
                         session.email = result[0].emailaddress;
                         return res.redirect("/home");
                     }
-                    message = {
-                      flag: true,
-                      type: "warning",
-                      intro: "Error",
-                      message: "Something Wrong",
-                    };
-                    res.render("login", { message });
+                    // message = {
+                    //   flag: true,
+                    //   type: "warning",
+                    //   intro: "Error",
+                    //   message: "Something Wrong",
+                    // };
+                    // res.render("login", { message });
                 });    
             })
             .catch(err => {
