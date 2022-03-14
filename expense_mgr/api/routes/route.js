@@ -8,6 +8,7 @@ const loginController = require("../controllers/loginController");
 const addTranscController = require("../controllers/addTranscController");
 const addAccountController = require("../controllers/addAccountController");
 const addMemberController = require("../controllers/addMemberController");
+const accDetailsContolller = require("../controllers/accDetailsContolller");
 const {sessionChecker, userChecker, transcChecker} = require('../middleware/middleware');
 const { check } = require("express-validator");
 
@@ -40,7 +41,7 @@ route.get('/delete/:id', sessionChecker, userChecker, addAccountController.getDe
 route.get('/logout', controller.logout);
 
 //get route for acc-details page
-route.get('/acc-details/:id', sessionChecker, userChecker, controller.getAccDetails);
+route.get('/acc-details/:id', sessionChecker, userChecker, accDetailsContolller.getAccDetails);
 
 //get & post routes transaction
 route.get('/addtransc/:id', sessionChecker, userChecker, addTranscController.getAddTransc);
