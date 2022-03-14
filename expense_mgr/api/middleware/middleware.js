@@ -35,7 +35,6 @@ var transcChecker = async( req, res, next) => {
   let record2 = await account.findOne({_id: record1.accountid});
   let uid = false;
   record2.userid.forEach(element2 => {
-    console.log(element2);
     if(req.session._id == element2){
       uid = true;
     }

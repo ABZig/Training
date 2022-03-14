@@ -55,8 +55,6 @@ getAccDetails: async (req, res) => {
 
   var userdetails = await user.findOne({_id : showAccountName.ownership}).exec();
 
-  console.log(showAccountName);
-
   let DebitAmount=0;
   let CreditAmount=0;
   let TotalAmount=0;
