@@ -45,13 +45,6 @@ postlogin: (req, res) => {
                         session.email = result[0].emailaddress;
                         return res.redirect("/home");
                     }
-                    // message = {
-                    //   flag: true,
-                    //   type: "warning",
-                    //   intro: "Error",
-                    //   message: "Something Wrong",
-                    // };
-                    // res.render("login", { message });
                 });    
             })
             .catch(err => {
