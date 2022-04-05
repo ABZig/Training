@@ -16,6 +16,15 @@
             <div class="form-title-login text-center">
                 <h2 class="text-dark my-5"><h1>Login Form</h1></h2>
             </div>
+            <% if(message.flag){ %>
+                <div class="alert alert-<%= message.type %>">
+                  <strong>
+                    <%= message.intro %>
+                  </strong>
+                  <%= message.message %>
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                </div>
+                <% } %>
     <form action="/home" method="post">
         <div class="col-md-12 mb-3 my-5 animated bounceInLeft">
             <label for="exampleInputEmail1">Email address</label>

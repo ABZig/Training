@@ -55,6 +55,13 @@ module.exports = {
               session.email = result[0].emailaddress;
               return res.redirect('/home');
             }
+            message = {
+              flag: true,
+              type: 'warning',
+              intro: 'Error',
+              message: 'Something Wrong In Email or Password!',
+            };
+            return res.render('login', { message });
           }
         );
       })
